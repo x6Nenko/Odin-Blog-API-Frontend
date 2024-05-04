@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from '../routes/Root.jsx';
-import Posts from '../routes/Posts.jsx'
-import Post from '../routes/Post.jsx'
+import Root from '../src/routes/Root.jsx';
+import Posts from '../src/routes/Posts.jsx'
+import Post from '../src/routes/Post.jsx'
 import ErrorPage from './error-page.jsx';
-import Registration from '../routes/Registration.jsx';
-import Login from '../routes/Login.jsx';
+import Registration from '../src/routes/Registration.jsx';
+import Login from '../src/routes/Login.jsx';
 import './index.css'
 
 const router = createBrowserRouter([
