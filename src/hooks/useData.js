@@ -7,7 +7,7 @@ function useData(url) {
     let ignore = false;
 
     if (url) {
-      fetch(url)
+      fetch(url, { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
         .then(response => response.json())
         .then(json => {
           if (!ignore) {
