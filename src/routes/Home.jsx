@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <main>
-      <h2>Recently published</h2>
+      <h2 className="recently-published-header">Recently published</h2>
 
       <section className="recently-published-container">
         {postsArray && postsArray.map(post => ( 

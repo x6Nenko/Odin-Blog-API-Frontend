@@ -10,7 +10,7 @@
   margin: auto;
 }
 
-button, input {
+button, input, textarea {
   padding: 8px;
 }
 
@@ -34,21 +34,66 @@ nav {
   gap: 20px;
 }
 
-/* =============== HOME =============== */
+/* =============== HOME/POSTS/POST =============== */
 
 .recently-published-container {
-  margin-top: 60px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
 }
 
-.recently-published-article {
-
+.recently-published-header, .article-count {
+  margin-top: 40px;
 }
 
 .recently-published-article p {
  margin: 8px 0 16px;
+}
+
+.article-body-text {
+  margin-top: 32px;
+}
+
+.single-article {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.single-article-text {
+  margin-top: 16px;
+}
+
+/* =============== COMMENTS =============== */
+
+.comments-section {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comments-section h4 {
+  margin-bottom: 16px;
+}
+
+.comment {
+  display: inline-block;
+}
+
+.comment span {
+  margin-left: 16px;
+  font-size: 14px;
+  color: #b4b4b4;
+}
+
+.send-comment-btn {
+  margin-top: 16px;
+}
+
+.comments-form {
+  margin-bottom: 16px;
 }
 
 /* =============== SIGN UP/IN =============== */

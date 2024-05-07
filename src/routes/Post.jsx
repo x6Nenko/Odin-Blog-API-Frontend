@@ -1,11 +1,81 @@
 import { useParams } from "react-router-dom";
-
+import useData from "../hooks/useData"
+import { DateTime } from "luxon";
+import { useState } from "react";
 
 const Post = () => {
   const { postid } = useParams();
+  const postData = useData(`http://localhost:3000/posts/${postid}`);
+  const commentsData = useData(`http://localhost:3000/posts/${postid}/comments`);
+  const commentsArray = commentsData && commentsData.posts;
+
+  function convertTime(time) {
+    const createdAtDate = new Date(time);
+    return DateTime.fromJSDate(createdAtDate).toLocaleString(DateTime.DATETIME_MED);
+  }
+
+  const [formData, setFormData] = useState({
+    text: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`http://localhost:3000/posts/${postid}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        console.log("ok");
+      } else {
+        console.log("not ok");
+      }
+    } catch (error) {
+      console.error('Something went wrong:', error);
+      // Handle other error cases
+    }
+  };
 
   return (
-    <div>Single post, id: {postid}</div>
+    <main>
+      {postData &&
+        <article className="single-article">
+          <h3>{postData.post.title}</h3>
+          <p>Author: {postData.post.author.username}, posted at: {convertTime(postData.post.createdAt)}</p>
+          <p className="single-article-text">{postData.post.text}</p>
+
+        </article>
+      }
+
+      <section className="comments-section">
+        <h4>Comments</h4>
+
+        <div className="comments-form">
+          <form onSubmit={handleSubmit}>
+            <div className="input-holder">
+              <label htmlFor="text">Write new comment:</label>
+              <textarea name="text" id="text" rows={3} value={formData.text} onChange={handleChange} required />
+            </div>
+
+            <button className="send-comment-btn" type="submit">Send</button>
+          </form>
+        </div>
+
+        {commentsData && commentsArray.map(comment => ( 
+          <p className="comment" key={comment._id}>{comment.author.username}: {comment.text} <span>({convertTime(comment.createdAt)})</span></p>
+        ))}
+      </section>
+    </main>
   )
 }
 
