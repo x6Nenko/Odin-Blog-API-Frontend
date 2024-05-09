@@ -22,8 +22,8 @@ const Post = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
 
     try {
       const response = await fetch(`http://localhost:3000/posts/${postid}/comments`, {
@@ -36,9 +36,9 @@ const Post = () => {
       });
 
       if (response.ok) {
-        console.log("ok");
+        // console.log("ok");
       } else {
-        console.log("not ok");
+        // console.log("not ok");
       }
     } catch (error) {
       console.error('Something went wrong:', error);

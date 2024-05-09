@@ -9,7 +9,7 @@ const Navigation = () => {
   function handleLogout() {
     localStorage.removeItem("token");
     isLogged.updateIsLogged();
-    return navigate("/");
+    return navigate("/login");
   }
 
   return (
