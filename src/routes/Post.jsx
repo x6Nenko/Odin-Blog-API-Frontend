@@ -5,8 +5,9 @@ import { useState } from "react";
 
 const Post = () => {
   const { postid } = useParams();
-  const postData = useData(`http://localhost:3000/posts/${postid}`);
-  const commentsData = useData(`http://localhost:3000/posts/${postid}/comments`);
+  const [refetchComments, setRefetchComments] = useState(false);
+  const postData = useData(`https://pleasant-utopian-duke.glitch.me/posts/${postid}`);
+  const commentsData = useData(`https://pleasant-utopian-duke.glitch.me/posts/${postid}/comments`, refetchComments);
   const commentsArray = commentsData && commentsData.posts;
 
   function convertTime(time) {
@@ -22,11 +23,11 @@ const Post = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3000/posts/${postid}/comments`, {
+      const response = await fetch(`https://pleasant-utopian-duke.glitch.me/posts/${postid}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,9 +37,10 @@ const Post = () => {
       });
 
       if (response.ok) {
-        // console.log("ok");
+        setRefetchComments(!refetchComments);
+        console.log("ok");
       } else {
-        // console.log("not ok");
+        console.log("not ok");
       }
     } catch (error) {
       console.error('Something went wrong:', error);

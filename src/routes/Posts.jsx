@@ -2,7 +2,7 @@ import useData from "../hooks/useData"
 import { Link } from "react-router-dom";
 
 const Posts = () => {
-  const data = useData('http://localhost:3000/posts');
+  const data = useData('https://pleasant-utopian-duke.glitch.me/posts');
   const postsArray = data && data.posts;
 
   return (
