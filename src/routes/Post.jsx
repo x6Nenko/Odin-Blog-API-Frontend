@@ -53,7 +53,7 @@ const Post = () => {
       {postData &&
         <article className="single-article">
           <h3>{postData.post.title}</h3>
-          <p>Author: {postData.post.author.username}, posted at: {convertTime(postData.post.createdAt)}</p>
+          <p className="single-article-info">Author: {postData.post.author.username}, posted at: {convertTime(postData.post.createdAt)}</p>
           <p className="single-article-text">{postData.post.text}</p>
 
         </article>
